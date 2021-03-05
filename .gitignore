@@ -32,7 +32,3 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 /config/ipaddr.php
-
-controllers/ResourcesController.php
-models/ResourcesSearch.php
-views/resources
