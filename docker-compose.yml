@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - 8312:80
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./docker/nginx/logs:/var/log/nginx/
+
+  php:
+    build: ./
+    image: bms_yii2
+    volumes:
+      - ./:/var/www/html
+
+  db:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_DB=pgdb
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=strong123
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data: {}

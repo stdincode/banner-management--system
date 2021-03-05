@@ -1,0 +1,6 @@
+172.19.0.1 - - [04/Mar/2021:08:48:54 +0000] "GET / HTTP/1.1" 200 4124 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0" "-"
+172.19.0.1 - - [04/Mar/2021:08:48:54 +0000] "GET /assets/25bc557/css/bootstrap.css HTTP/1.1" 200 145933 "http://0.0.0.0:8312/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0" "-"
+172.19.0.1 - - [04/Mar/2021:08:48:54 +0000] "GET /css/site.css HTTP/1.1" 200 1842 "http://0.0.0.0:8312/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0" "-"
+172.19.0.1 - - [04/Mar/2021:08:48:54 +0000] "GET /assets/c2bd0d9e/jquery.js HTTP/1.1" 200 287630 "http://0.0.0.0:8312/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0" "-"
+172.19.0.1 - - [04/Mar/2021:08:48:54 +0000] "GET /assets/1889c20e/yii.js HTTP/1.1" 200 20934 "http://0.0.0.0:8312/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0" "-"
+172.19.0.1 - - [04/Mar/2021:08:48:54 +0000] "GET /assets/25bc557/js/bootstrap.js HTTP/1.1" 200 75484 "http://0.0.0.0:8312/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0" "-"
