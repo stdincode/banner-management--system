@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ad_places".
@@ -51,6 +52,15 @@ class AdPlaces extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'name',
+            'height',
+            'width',
+        ];
+    }
+
     /**
      * Gets query for [[BannerAdPlaces]].
      *
@@ -69,5 +79,17 @@ class AdPlaces extends \yii\db\ActiveRecord
     public function getResourceAdPlaces()
     {
         return $this->hasMany(ResourceAdPlaces::className(), ['ad_place_id' => 'id']);
+    }
+
+    public static function getNamesList($ids)
+    {
+        if (!empty($ids)) {
+            $result = [];
+            foreach ($ids as $key => $item) {
+                $result[] = self::find()->where(['id' => $item])->all();
+            }
+            return $result;
+        }
+        return $ids;
     }
 }

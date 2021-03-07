@@ -18,6 +18,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => $secret,
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -25,6 +28,8 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'enableSession' => false,
+            'loginUrl' => null,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -44,8 +49,19 @@ $config = [
 //            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'user'],
+//                'modules/<controller:[\w-]+>' => 'api/<controller>',
+//                'api/v1/resource/getbanner' => 'api/resource/actionBanner',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'modules/resource',
+                    'pluralize' => false,
+                ],
             ],
+        ],
+    ],
+    'modules' => [
+        'modules' => [
+            'class' => 'app\modules\api',
         ],
     ],
 ];

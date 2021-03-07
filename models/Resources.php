@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "resources".
@@ -14,6 +15,7 @@ use Yii;
  */
 class Resources extends \yii\db\ActiveRecord
 {
+    public $adPlaceIds;
     /**
      * {@inheritdoc}
      */
@@ -30,6 +32,7 @@ class Resources extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
+            [['adPlaceIds'], 'safe'],
         ];
     }
 
@@ -52,5 +55,24 @@ class Resources extends \yii\db\ActiveRecord
     public function getResourceAdPlaces()
     {
         return $this->hasMany(ResourceAdPlaces::className(), ['resource_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[adPlaceIds]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdPlaces()
+    {
+        $this->hasMany(AdPlaces::className(), ['id' => 'ad_place_id'])->via('resourceAdPlaces');
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        ResourceAdPlaces::deleteAll(['resource_id' => $this->id]);
+        if (!empty($this->adPlaceIds)) {
+            ResourceAdPlaces::writeData($this->id, $this->adPlaceIds);
+        }
     }
 }

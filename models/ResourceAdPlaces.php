@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "resource_ad_places".
@@ -66,5 +67,15 @@ class ResourceAdPlaces extends \yii\db\ActiveRecord
     public function getResource()
     {
         return $this->hasOne(Resources::className(), ['id' => 'resource_id']);
+    }
+
+    public static function writeData(int $resource_id, array $ad_place_id)
+    {
+        foreach ($ad_place_id as $key => $value) {
+            \Yii::$app->db->createCommand()->insert('resource_ad_places', [
+                'resource_id' => $resource_id,
+                'ad_place_id' => $value
+            ])->execute();
+        }
     }
 }
