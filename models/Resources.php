@@ -10,12 +10,14 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
+ * @property array $ad_place_ids
  *
  * @property ResourceAdPlaces[] $resourceAdPlaces
  */
 class Resources extends \yii\db\ActiveRecord
 {
-    public $adPlaceIds;
+    public $ad_place_ids;
+
     /**
      * {@inheritdoc}
      */
@@ -32,7 +34,7 @@ class Resources extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
-            [['adPlaceIds'], 'safe'],
+            [['ad_place_ids'], 'safe'],
         ];
     }
 
@@ -58,7 +60,7 @@ class Resources extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[adPlaceIds]].
+     * Gets query for [[ad_place_ids]].
      *
      * @return \yii\db\ActiveQuery
      */
@@ -71,8 +73,8 @@ class Resources extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         ResourceAdPlaces::deleteAll(['resource_id' => $this->id]);
-        if (!empty($this->adPlaceIds)) {
-            ResourceAdPlaces::writeData($this->id, $this->adPlaceIds);
+        if (!empty($this->ad_place_ids)) {
+            ResourceAdPlaces::writeData($this->id, $this->ad_place_ids);
         }
     }
 }

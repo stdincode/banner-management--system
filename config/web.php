@@ -53,7 +53,10 @@ $config = [
 //                'api/v1/resource/getbanner' => 'api/resource/actionBanner',
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'modules/resource',
+                    'controller' => [
+                            'modules/resource',
+                            'modules/banner',
+                        ],
                     'pluralize' => false,
                 ],
             ],
