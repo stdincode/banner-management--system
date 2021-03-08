@@ -13,7 +13,7 @@ class Banners extends \app\models\Banners
     {
         return [
             'name_ad_places' => function($model) {
-                return $this->getPlaceNamesList($model->bannerAdPlaces);
+                return $this->getAdPlaceList($model->bannerAdPlaces);
             },
         ];
     }
@@ -38,7 +38,7 @@ class Banners extends \app\models\Banners
                 ':tag_ids' => count($tag_ids) == 1 ? $tag_ids[0] : $tag_ids,
             ])->execute();
         } else {
-            throw new Exception('ad_place_ids и tag_ids необходимо передавать как нумерованные массивы');
+            throw new Exception('ad_place_ids and tag_ids must be passed as numbered arrays');
         }
     }
 
@@ -58,7 +58,7 @@ class Banners extends \app\models\Banners
                 ':ad_place_ids' => count($ad_place_ids) == 1 ? $ad_place_ids[0] : $ad_place_ids,
             ])->execute();
         } else {
-            throw new Exception('ad_place_ids необходимо передавать как нумерованный массив');
+            throw new Exception('ad_place_ids must be passed as a numbered array');
         }
     }
 }

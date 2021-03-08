@@ -11,12 +11,16 @@ use yii\helpers\ArrayHelper;
  * @property int $id
  * @property string $name
  * @property array $ad_place_ids
+ * @property array $formResourceAdPlaces
  *
  * @property ResourceAdPlaces[] $resourceAdPlaces
  */
 class Resources extends \yii\db\ActiveRecord
 {
+    use BaseResourceAndBannerTrait;
+
     public $ad_place_ids;
+    public $formResourceAdPlaces;
 
     /**
      * {@inheritdoc}
@@ -34,7 +38,7 @@ class Resources extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
-            [['ad_place_ids'], 'safe'],
+            [['ad_place_ids', 'formResourceAdPlaces'], 'safe'],
         ];
     }
 

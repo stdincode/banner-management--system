@@ -31,4 +31,5 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+# for gii
 /config/ipaddr.php

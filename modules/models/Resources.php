@@ -11,7 +11,7 @@ class Resources extends \app\models\Resources
     {
         return [
             'name_ad_places' => function($model) {
-                return $this->getPlaceNamesList($model->resourceAdPlaces);
+                return $this->getAdPlaceList($model->resourceAdPlaces);
             },
         ];
     }

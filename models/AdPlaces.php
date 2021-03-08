@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ad_places".
@@ -18,6 +17,8 @@ use yii\helpers\ArrayHelper;
  */
 class AdPlaces extends \yii\db\ActiveRecord
 {
+    use BaseLinkingTablesTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -49,15 +50,6 @@ class AdPlaces extends \yii\db\ActiveRecord
             'name' => 'Name',
             'height' => 'Height',
             'width' => 'Width',
-        ];
-    }
-
-    public function fields()
-    {
-        return [
-            'name',
-            'height',
-            'width',
         ];
     }
 

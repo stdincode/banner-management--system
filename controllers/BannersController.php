@@ -2,9 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\AdPlaces;
+use app\models\BannerAdPlaces;
+use app\models\Tags;
 use Yii;
 use app\models\Banners;
 use app\models\BannersSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,10 +41,14 @@ class BannersController extends Controller
     {
         $searchModel = new BannersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $tags = Tags::getAllIdAndNameAsArray();
+        $adPlaces = AdPlaces::getAllIdAndNameAsArray();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'tags' => $tags,
+            'adPlaces' => $adPlaces,
         ]);
     }
 
@@ -65,13 +73,16 @@ class BannersController extends Controller
     public function actionCreate()
     {
         $model = new Banners();
-
+        $tags = Tags::getAllIdAndNameAsArray();
+        $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            BannerAdPlaces::batchInsertAdPlaces($model->formBannerAdPlaces, $model->id, 'banner_ad_places', 'banner_id');
+            return $this->redirect(['index']);
         }
-
         return $this->render('create', [
             'model' => $model,
+            'tags' => $tags,
+            'adPlaces' => $adPlaces,
         ]);
     }
 
@@ -85,13 +96,16 @@ class BannersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $tags = Tags::getAllIdAndNameAsArray();
+        $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'tags' => $tags,
+            'adPlaces' => $adPlaces,
         ]);
     }
 

@@ -8,9 +8,13 @@ use app\models\Banners;
 
 /**
  * BannersSearch represents the model behind the search form of `app\models\Banners`.
+ * @property array $tags
+ * @property array $adplaces
  */
 class BannersSearch extends Banners
 {
+    public $tags;
+    public $adplaces;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +22,7 @@ class BannersSearch extends Banners
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'tags', 'adplaces'], 'safe'],
         ];
     }
 
@@ -62,6 +66,10 @@ class BannersSearch extends Banners
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name]);
+        $query->joinWith('bannerAdPlaces as bp')
+            ->andFilterWhere(['in', 'bp.ad_place_id', $this->adplaces]);
+        $query->joinWith('bannerTags as bt')
+            ->andFilterWhere(['in', 'bt.tag_id', $this->tags]);
 
         return $dataProvider;
     }

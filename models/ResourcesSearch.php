@@ -8,9 +8,12 @@ use app\models\Resources;
 
 /**
  * ResourcesSearch represents the model behind the search form of `app\models\Resources`.
+ * @property array $adplaces
  */
 class ResourcesSearch extends Resources
 {
+    public $adplaces;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +21,7 @@ class ResourcesSearch extends Resources
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'adplaces'], 'safe'],
         ];
     }
 
@@ -62,6 +65,8 @@ class ResourcesSearch extends Resources
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name]);
+        $query->joinWith('resourceAdPlaces as rp')
+            ->andFilterWhere(['in', 'rp.ad_place_id', $this->adplaces]);
 
         return $dataProvider;
     }

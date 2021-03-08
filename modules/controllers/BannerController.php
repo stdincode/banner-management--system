@@ -24,6 +24,6 @@ class BannerController extends BaseApiController
             Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);
             return Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);
         }
-        throw new Exception('Некорректный ввод');;
+        throw new Exception('Invalid input');;
     }
 }

@@ -38,10 +38,10 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Ресурсы', 'url' => ['/resources']],
-            ['label' => 'Места размещения', 'url' => ['/places']],
-            ['label' => 'Баннеры', 'url' => ['/banners']],
-            ['label' => 'Теги', 'url' => ['/tags']],
+            ['label' => 'Resources', 'url' => ['/resources']],
+            ['label' => 'Ad places', 'url' => ['/ad-places']],
+            ['label' => 'Banners', 'url' => ['/banners']],
+            ['label' => 'Tags', 'url' => ['/tags']],
         ],
     ]);
     NavBar::end();

@@ -3,18 +3,24 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "banners".
  *
  * @property int $id
  * @property string $name
+ * @property array $formBannerAdPlaces
  *
  * @property BannerAdPlaces[] $bannerAdPlaces
  * @property BannerTags[] $bannerTags
  */
 class Banners extends \yii\db\ActiveRecord
 {
+    use BaseResourceAndBannerTrait;
+
+    public $formBannerAdPlaces;
+
     /**
      * {@inheritdoc}
      */
@@ -31,6 +37,7 @@ class Banners extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
+            [['formBannerAdPlaces'], 'safe'],
         ];
     }
 
@@ -63,5 +70,13 @@ class Banners extends \yii\db\ActiveRecord
     public function getBannerTags()
     {
         return $this->hasMany(BannerTags::className(), ['banner_id' => 'id']);
+    }
+
+    public function getTagsName($bannerTags) {
+        if (!empty($bannerTags)) {
+            $tagIds = ArrayHelper::map($bannerTags, 'tag_id', 'tag_id');
+            return Tags::find()->where(['in', 'id', $tagIds])->asArray()->all();
+        }
+        return $bannerTags;
     }
 }

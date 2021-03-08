@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\AdPlaces;
+use app\models\BannerAdPlaces;
 use Yii;
 use app\models\Resources;
 use app\models\ResourcesSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -37,10 +40,11 @@ class ResourcesController extends Controller
     {
         $searchModel = new ResourcesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'adPlaces' => $adPlaces,
         ]);
     }
 
@@ -65,13 +69,14 @@ class ResourcesController extends Controller
     public function actionCreate()
     {
         $model = new Resources();
-
+        $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            BannerAdPlaces::batchInsertAdPlaces($model->formResourceAdPlaces, $model->id, 'resource_ad_places', 'resource_id');
+            return $this->redirect(['index']);
         }
-
         return $this->render('create', [
             'model' => $model,
+            'adPlaces' => $adPlaces,
         ]);
     }
 
@@ -85,13 +90,14 @@ class ResourcesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'adPlaces' => $adPlaces,
         ]);
     }
 

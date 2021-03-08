@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Resources */
+/* @var $adPlaces app\models\resourceAdPlaces */
 
 $this->title = 'Update Resources: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Resources', 'url' => ['index']];
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'adPlaces' => $adPlaces,
     ]) ?>
 
 </div>

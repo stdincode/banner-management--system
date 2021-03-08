@@ -15,6 +15,9 @@ use Yii;
  */
 class BannerAdPlaces extends \yii\db\ActiveRecord
 {
+    use BaseResourceAndBannerAdPlacesTrait;
+    use BaseLinkingTablesTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -46,16 +49,6 @@ class BannerAdPlaces extends \yii\db\ActiveRecord
             'banner_id' => 'Banner ID',
             'ad_place_id' => 'Ad Place ID',
         ];
-    }
-
-    /**
-     * Gets query for [[AdPlace]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAdPlace()
-    {
-        return $this->hasOne(AdPlaces::className(), ['id' => 'ad_place_id']);
     }
 
     /**

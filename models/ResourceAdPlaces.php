@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "resource_ad_places".
@@ -16,6 +15,9 @@ use yii\helpers\ArrayHelper;
  */
 class ResourceAdPlaces extends \yii\db\ActiveRecord
 {
+    use BaseResourceAndBannerAdPlacesTrait;
+    use BaseLinkingTablesTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -47,16 +49,6 @@ class ResourceAdPlaces extends \yii\db\ActiveRecord
             'resource_id' => 'Resource ID',
             'ad_place_id' => 'Ad Place ID',
         ];
-    }
-
-    /**
-     * Gets query for [[AdPlace]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAdPlace()
-    {
-        return $this->hasOne(AdPlaces::className(), ['id' => 'ad_place_id']);
     }
 
     /**

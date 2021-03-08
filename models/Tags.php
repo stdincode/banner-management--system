@@ -14,6 +14,8 @@ use Yii;
  */
 class Tags extends \yii\db\ActiveRecord
 {
+    use BaseLinkingTablesTrait;
+
     /**
      * {@inheritdoc}
      */

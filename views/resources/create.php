@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Resources */
+/* @var $adPlaces app\models\resourceAdPlaces */
 
 $this->title = 'Create Resources';
 $this->params['breadcrumbs'][] = ['label' => 'Resources', 'url' => ['index']];
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'adPlaces' => $adPlaces,
     ]) ?>
 
 </div>
