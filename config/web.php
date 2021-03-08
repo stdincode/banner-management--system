@@ -46,16 +46,15 @@ $config = [
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
-//            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-//                'modules/<controller:[\w-]+>' => 'api/<controller>',
-//                'api/v1/resource/getbanner' => 'api/resource/actionBanner',
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                             'modules/resource',
                             'modules/banner',
+                            'modules/ad-place',
+                            'modules/tag',
                         ],
                     'pluralize' => false,
                 ],

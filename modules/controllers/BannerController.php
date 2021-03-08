@@ -4,6 +4,7 @@
 namespace app\modules\controllers;
 
 use app\modules\models\Banners;
+use yii\base\Exception;
 
 /**
  * Tag controller for the `modules` module
@@ -21,8 +22,8 @@ class BannerController extends BaseApiController
             return Banners::getBannerIdByResourcesAndAdPlaceAndTag($resource_id, $ad_place_ids, $tag_ids);
         } elseif ($resource_id && $ad_place_ids) {
             Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);
-            return Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);;
+            return Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);
         }
-        return 'тут будет исключение, подождите';
+        throw new Exception('Некорректный ввод');;
     }
 }

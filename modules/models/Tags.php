@@ -4,7 +4,13 @@
 namespace app\modules\models;
 
 
-class Tags
+class Tags extends \app\models\Tags
 {
-
+    public function fields()
+    {
+        return [
+            'id',
+            'name',
+        ];
+    }
 }
