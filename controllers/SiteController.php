@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\modules\models\Banners;
 use Yii;
 use yii\web\Controller;
 
@@ -30,6 +31,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $test = Banners::getBannerIdByResourcesAndAdPlace(31, [1]);
+        return $this->render('index', ['test' => $test]);
     }
 }
