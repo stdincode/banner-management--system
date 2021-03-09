@@ -71,3 +71,7 @@ http://localhost:8312
 ~~~
 
 Документация к API `doc/ApiDocumentation.md`
+
+### Схема БД
+
+![Image alt](https://github.com/stdincode/banner-management--system/raw/main/doc/DatabaseSchema.png)
