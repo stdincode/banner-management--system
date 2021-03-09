@@ -30,7 +30,7 @@
 cp git/this_repository
 ~~~
 
-### Сгенерировать cookieValidationKey или оставить существующий
+### Сгенерировать cookieValidationKey или оставить существующий `config/secret.php`
 
 ```php
 'request' => [
