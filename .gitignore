@@ -33,3 +33,4 @@ tests/_support/_generated
 /.vagrant
 # for gii
 /config/ipaddr.php
+/docker/nginx/logs

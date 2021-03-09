@@ -15,7 +15,6 @@ use Yii;
  */
 class BannerAdPlaces extends \yii\db\ActiveRecord
 {
-    use BaseResourceAndBannerAdPlacesTrait;
     use BaseLinkingTablesTrait;
 
     /**
@@ -59,5 +58,26 @@ class BannerAdPlaces extends \yii\db\ActiveRecord
     public function getBanner()
     {
         return $this->hasOne(Banners::className(), ['id' => 'banner_id']);
+    }
+
+    /**
+     * Gets query for [[AdPlace]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdPlace()
+    {
+        return $this->hasOne(AdPlaces::className(), ['id' => 'ad_place_id']);
+    }
+
+    public static function writeData(int $banner_id, array $ad_place_id)
+    {
+        self::deleteAll(['banner_id' => $banner_id]);
+        foreach ($ad_place_id as $key => $value) {
+            \Yii::$app->db->createCommand()->insert('banner_ad_places', [
+                'banner_id' => $banner_id,
+                'ad_place_id' => $value
+            ])->execute();
+        }
     }
 }

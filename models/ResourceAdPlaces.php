@@ -15,7 +15,6 @@ use Yii;
  */
 class ResourceAdPlaces extends \yii\db\ActiveRecord
 {
-    use BaseResourceAndBannerAdPlacesTrait;
     use BaseLinkingTablesTrait;
 
     /**
@@ -59,6 +58,16 @@ class ResourceAdPlaces extends \yii\db\ActiveRecord
     public function getResource()
     {
         return $this->hasOne(Resources::className(), ['id' => 'resource_id']);
+    }
+
+    /**
+     * Gets query for [[AdPlace]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdPlace()
+    {
+        return $this->hasOne(AdPlaces::className(), ['id' => 'ad_place_id']);
     }
 
     public static function writeData(int $resource_id, array $ad_place_id)

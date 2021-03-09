@@ -21,7 +21,6 @@ class BannerController extends BaseApiController
         if ($resource_id && $ad_place_ids && $tag_ids) {
             return Banners::getBannerIdByResourcesAndAdPlaceAndTag($resource_id, $ad_place_ids, $tag_ids);
         } elseif ($resource_id && $ad_place_ids) {
-            Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);
             return Banners::getBannerIdByResourcesAndAdPlace($resource_id, $ad_place_ids);
         }
         throw new Exception('Invalid input');;

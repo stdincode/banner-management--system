@@ -76,7 +76,6 @@ class BannersController extends Controller
         $tags = Tags::getAllIdAndNameAsArray();
         $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            BannerAdPlaces::batchInsertAdPlaces($model->formBannerAdPlaces, $model->id, 'banner_ad_places', 'banner_id');
             return $this->redirect(['index']);
         }
         return $this->render('create', [

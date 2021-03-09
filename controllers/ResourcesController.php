@@ -71,7 +71,6 @@ class ResourcesController extends Controller
         $model = new Resources();
         $adPlaces = AdPlaces::getAllIdAndNameAsArray();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            BannerAdPlaces::batchInsertAdPlaces($model->formResourceAdPlaces, $model->id, 'resource_ad_places', 'resource_id');
             return $this->redirect(['index']);
         }
         return $this->render('create', [

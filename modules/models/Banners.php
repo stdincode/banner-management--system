@@ -46,7 +46,7 @@ class Banners extends \app\models\Banners
         if (is_array($ad_place_ids)) {
             $sql = "
                     select bp.banner_id
-                    from banner_ad_places as bp join resource_ad_places as rp
+                    from banner_ad_places as bp inner join resource_ad_places as rp
                     on rp.ad_place_id = bp.ad_place_id
                     where
                         rp.resource_id = :resource_id and

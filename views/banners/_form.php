@@ -17,9 +17,20 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'formBannerAdPlaces')->widget(Select2::classname(),
+    <?= $form->field($model, 'ad_place_ids')->widget(Select2::classname(),
         [
             'data' => $adPlaces,
+            'language' => 'ru',
+            'options' => ['placeholder' => 'Выберите шаблон ...'],
+            'pluginOptions' => [
+                'allowClear' => true,
+                'multiple' => true,
+            ],
+        ]) ?>
+
+    <?= $form->field($model, 'tag_ids')->widget(Select2::classname(),
+        [
+            'data' => $tags,
             'language' => 'ru',
             'options' => ['placeholder' => 'Выберите шаблон ...'],
             'pluginOptions' => [

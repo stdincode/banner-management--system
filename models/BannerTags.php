@@ -67,4 +67,15 @@ class BannerTags extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tags::className(), ['id' => 'tag_id']);
     }
+
+    public static function writeData(int $banner_id, array $tag_ids)
+    {
+        self::deleteAll(['banner_id' => $banner_id]);
+        foreach ($tag_ids as $key => $value) {
+            \Yii::$app->db->createCommand()->insert('banner_tags', [
+                'banner_id' => $banner_id,
+                'tag_id' => $value
+            ])->execute();
+        }
+    }
 }

@@ -10,7 +10,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
- * @property array $formBannerAdPlaces
+ * @property array $ad_place_ids
+ * @property array $tag_ids
  *
  * @property BannerAdPlaces[] $bannerAdPlaces
  * @property BannerTags[] $bannerTags
@@ -19,7 +20,8 @@ class Banners extends \yii\db\ActiveRecord
 {
     use BaseResourceAndBannerTrait;
 
-    public $formBannerAdPlaces;
+    public $ad_place_ids;
+    public $tag_ids;
 
     /**
      * {@inheritdoc}
@@ -37,7 +39,7 @@ class Banners extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255],
-            [['formBannerAdPlaces'], 'safe'],
+            [['ad_place_ids', 'tag_ids'], 'safe'],
         ];
     }
 
@@ -78,5 +80,16 @@ class Banners extends \yii\db\ActiveRecord
             return Tags::find()->where(['in', 'id', $tagIds])->asArray()->all();
         }
         return $bannerTags;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if (!empty($this->ad_place_ids)) {
+            BannerAdPlaces::writeData($this->id, $this->ad_place_ids);
+        }
+        if (!empty($this->tag_ids)) {
+            BannerTags::writeData($this->id, $this->tag_ids);
+        }
     }
 }
