@@ -74,4 +74,4 @@ http://localhost:8312
 
 ### Схема БД
 
-![Image alt](https://github.com/stdincode/banner-management--system/raw/main/doc/DatabaseSchema.png)
+![Image alt](https://github.com/stdincode/banner-management--system/blob/main/doc/DatabaseSchema.PNG)
